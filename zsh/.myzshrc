@@ -4,7 +4,7 @@ export GIT_EDITOR=vim
 # Example aliases
 alias config="code ~/.scripts/zsh/.myzshrc"
 alias reset="source ~/.zshrc"
-alias configzsh="source ~/.zshrc"
+alias configzsh="code ~/.zshrc"
 alias ohmyzsh="code ~/.oh-my-zsh"
 
 eval `dircolors /c/Users/brianb/projects/personal/dircolors-solarized/dircolors.256dark`
