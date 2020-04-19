@@ -7,4 +7,4 @@ alias reset="source ~/.zshrc"
 alias configzsh="code ~/.zshrc"
 alias ohmyzsh="code ~/.oh-my-zsh"
 
-eval `dircolors /mtn/c/Users/brian/projects/dircolors-solarized/dircolors.256dark`
+eval `dircolors ~/projects/dircolors-solarized/dircolors.256dark`
