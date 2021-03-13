@@ -1,3 +1,6 @@
+# allow input
+exec 0</dev/tty
+
 if $(command -v git >/dev/null )
 then
   echo "*****************"
@@ -7,6 +10,14 @@ else
   echo "******************"
   echo "* installing git *"
   echo "******************"
+
+  if [[ $OSTYPE == "linux-gnu" ]]
+    then 
+      sudo apt update
+      sudo apt install git
+    else 
+      echo "Not supported yet please install git before continuing." 
+  fi
 fi
 
 ## setting up the git user
