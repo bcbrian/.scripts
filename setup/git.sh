@@ -1,5 +1,6 @@
-# allow input
-exec 0</dev/tty
+#############
+# setup git #
+#############
 
 if $(command -v git >/dev/null )
 then

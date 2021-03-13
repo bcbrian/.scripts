@@ -1,5 +1,6 @@
-# allow input
-exec 0</dev/tty
+#############
+# setup zsh #
+#############
 
 if $(command -v zsh >/dev/null )
 then
