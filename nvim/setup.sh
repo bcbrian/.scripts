@@ -14,7 +14,7 @@ pyenv activate neovim3
 curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
 source ~/.zshrc
 chmod u+x nvim.appimage
-./nvim.appimage
+./nvim.appimage --appimage-extract
 source ~/.zshrc
 sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
 sudo update-alternatives --config vi
