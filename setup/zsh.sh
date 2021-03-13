@@ -11,9 +11,9 @@ else
   echo "******************"
   echo "* installing zsh *"
   echo "******************"
-  sudo apt update
-  sudo apt install zsh
-  zsh --version
-  chsh -s $(which zsh)
-  zsh
+  # sudo apt update
+  # sudo apt install zsh
+  # zsh --version
+  # chsh -s $(which zsh)
+  # zsh
 fi
