@@ -17,11 +17,11 @@ chmod u+x nvim.appimage < /dev/tty
 ./nvim.appimage --appimage-extract < /dev/tty
 mv squashfs-root / && ln -s /squashfs-root/AppRun /usr/bin/nvim < /dev/tty
 source ~/.zshrc 
-sudo update-alternatives --install /usr/bin/vi vi /squashfs-root/usr/share/nvim 60 < /dev/tty
+sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60 < /dev/tty
 sudo update-alternatives --config vi < /dev/tty
-sudo update-alternatives --install /usr/bin/vim vim /squashfs-root/usr/share/nvim 60 < /dev/tty
+sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60 < /dev/tty
 sudo update-alternatives --config vim < /dev/tty
-sudo update-alternatives --install /usr/bin/editor editor /squashfs-root/usr/share/nvim 60 < /dev/tty
+sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60 < /dev/tty
 sudo update-alternatives --config editor < /dev/tty
 source ~/.zshrc
 mkdir ~/.config
