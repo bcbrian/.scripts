@@ -1,10 +1,10 @@
 if $(command -v ohmyzsh >/dev/null )
 then
-  echo "*****************"
+  echo "*********************"
   echo "* ohmyzsh installed *"
-  echo "*****************"
+  echo "*********************"
 else
-  echo "******************"
+  echo "**********************"
   echo "* installing ohmyzsh *"
-  echo "******************"
+  echo "**********************"
 fi

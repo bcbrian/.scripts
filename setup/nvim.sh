@@ -1,10 +1,10 @@
 if $(command -v nvim >/dev/null )
 then
-  echo "*****************"
+  echo "******************"
   echo "* nvim installed *"
-  echo "*****************"
+  echo "******************"
 else
-  echo "******************"
+  echo "*******************"
   echo "* installing nvim *"
-  echo "******************"
+  echo "*******************"
 fi
