@@ -1,4 +1,5 @@
-if $(command -v nvm >/dev/null ) $(command -v node >/dev/null )
+source ~/.zshrc
+if $(command -v nvm >/dev/null ) || $(command -v node >/dev/null )
 then
   echo "*****************"
   echo "* nvm installed *"
