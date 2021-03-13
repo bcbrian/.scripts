@@ -1,14 +1,36 @@
 ##############
 # SHOW LOGOS #
 ##############
-curl -o- https://scripts.codesagas.dev/setup/logo.sh | bash
+clear
+sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/logo.sh)"
 #######################
 # START SETUP TOOLING #
 #######################
-curl --silent -o- https://scripts.codesagas.dev/setup/git.sh | bash
-curl --silent -o- https://scripts.codesagas.dev/setup/zsh.sh | bash
-curl --silent -o- https://scripts.codesagas.dev/setup/ohmyzsh.sh | bash
-curl --silent -o- https://scripts.codesagas.dev/setup/nvm.sh | bash
-curl --silent -o- https://scripts.codesagas.dev/setup/nvim.sh | bash
+sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/git.sh)"
+sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/zsh.sh)"
+sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/ohmyzsh.sh)"
+sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/nvm.sh)"
+sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/nvim.sh)"
+source ~/.zshrc
+
+##############
+# NEXT STEPS #
+##############
+# Can I just run this?
+echo "SOME THINGS TO DO..."
+echo "*******************************************************"
+echo "* ssh-keygen -t ed25519 -C \"your_email@example.com\" *"
+echo "*******************************************************"
+echo "*************************************************************"
+echo "* cd ~ && git clone https://github.com/bcbrian/.scripts.git *"
+echo "*************************************************************"
+echo "**********************************"
+echo "* open nvim and run plug install *"
+echo "**********************************"
+echo "***************************************"
+echo "* setup nvim config file to load mine *"
+echo "***************************************"
+
+
 
 

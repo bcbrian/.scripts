@@ -3,24 +3,22 @@
 #     source /c/Users/brian/.scripts/zsh/.myzshrc
 # fi
 
-# hi
-echo "Hi Brian"
-# git/VIM
-export GIT_EDITOR=vim
+# logo 
+sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/logo.sh)"
+
+# NVM
+alias oldvim="/usr/bin/vim"
+alias vimdiff='nvim -d'
+export GIT_EDITOR=nvim
+alias vim="nvim"
+alias vi="nvim"
 
 # Example aliases
-alias scripts="code /c/Users/brian/.scripts"
-alias config="code /c/Users/brian/.scripts/zsh/.myzshrc"
-alias ahk="code /c/Users/brian/.scripts/ahk"
+alias scripts="code ~/.scripts"
+alias config="code ~/.scripts/zsh/.myzshrc"
 alias reset="source ~/.zshrc"
 alias configzsh="code ~/.zshrc"
 alias ohmyzsh="code ~/.oh-my-zsh"
-
-# eval `dircolors /c/Users/brian/projects/dircolors-solarized/dircolors.256dark`
-
-# - docker
-# export PATH="$PATH:$HOME/.local/bin"
-# export DOCKER_HOST=tcp://localhost:2375
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

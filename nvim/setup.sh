@@ -8,21 +8,14 @@ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev li
 
 git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
 source ~/.zshrc
-pyenv install 3.7.1 < /dev/tty
-pyenv virtualenv 3.7.1 neovim3 < /dev/tty
-pyenv activate neovim3 < /dev/tty
-curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage < /dev/tty
+pyenv install 3.7.1
+pyenv virtualenv 3.7.1 neovim3
+pyenv activate neovim3
+curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
 source ~/.zshrc
-chmod u+x nvim.appimage < /dev/tty
-./nvim.appimage --appimage-extract < /dev/tty
-mv squashfs-root / && ln -s /squashfs-root/AppRun /usr/bin/nvim < /dev/tty
-source ~/.zshrc 
-sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60 < /dev/tty
-sudo update-alternatives --config vi < /dev/tty
-sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60 < /dev/tty
-sudo update-alternatives --config vim < /dev/tty
-sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60 < /dev/tty
-sudo update-alternatives --config editor < /dev/tty
+chmod u+x nvim.appimage
+./nvim.appimage --appimage-extract
+mv squashfs-root / && ln -s /squashfs-root/AppRun /usr/bin/nvim
 source ~/.zshrc
 mkdir ~/.config
 mkdir ~/.config/nvim

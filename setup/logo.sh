@@ -1,4 +1,3 @@
-clear
 echo "MMMWN0xoc:;;;;;;;;;;;;;;;;;;;;:cox0NWMMM"
 echo "MWXx;.                            .;xXWM"
 echo "WO:.             .........          .:0W"

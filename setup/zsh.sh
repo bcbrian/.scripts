@@ -12,7 +12,7 @@ else
   echo "* installing zsh *"
   echo "******************"
   sudo apt update
-  sudo apt install zsh < /dev/tty
+  sudo apt -y install zsh
   zsh --version
   chsh -s $(which zsh)
   zsh

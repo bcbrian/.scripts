@@ -7,5 +7,5 @@ else
   echo "*******************"
   echo "* installing nvim *"
   echo "*******************"
-  curl --silent -o- https://scripts.codesagas.dev/nvim/setup.sh | bash
+  sh -c "$(curl -fsSL https://scripts.codesagas.dev/nvim/setup.sh)"
 fi
