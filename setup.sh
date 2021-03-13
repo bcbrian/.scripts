@@ -1,6 +1,7 @@
 ##############
 # SHOW LOGOS #
 ##############
+cd ~
 clear
 sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/logo.sh)"
 #######################
@@ -11,6 +12,7 @@ sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/zsh.sh)"
 sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/ohmyzsh.sh)"
 sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/nvm.sh)"
 sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/nvim.sh)"
+zsh
 source ~/.zshrc
 
 ##############
