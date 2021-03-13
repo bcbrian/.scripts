@@ -3,15 +3,15 @@
 ##############
 cd ~
 clear
-sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/logo.sh)"
+curl -o- https://scripts.codesagas.dev/setup/logo.sh | bash
 #######################
 # START SETUP TOOLING #
 #######################
-sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/git.sh)"
-sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/zsh.sh)"
-sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/ohmyzsh.sh)"
-sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/nvm.sh)"
-sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/nvim.sh)"
+curl -o- https://scripts.codesagas.dev/setup/git.sh | bash
+curl -o- https://scripts.codesagas.dev/setup/zsh.sh | bash
+curl -o- https://scripts.codesagas.dev/setup/ohmyzsh.sh | zsh
+curl -o- https://scripts.codesagas.dev/setup/nvm.sh | zsh
+curl -o- https://scripts.codesagas.dev/setup/nvim.sh | zsh
 zsh
 source ~/.zshrc
 
