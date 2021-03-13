@@ -1,4 +1,4 @@
-if $(command -v ohmyzsh >/dev/null)
+if $(! -d "~/.oh-my-zsh")
   then
     echo "*********************"
     echo "* ohmyzsh installed *"
@@ -8,7 +8,9 @@ if $(command -v ohmyzsh >/dev/null)
       then
         echo "*********************"
         echo "* prereqs installed *"
-        echo "*********************"        
+        echo "*********************"  
+
+              
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
       else
         echo "*************************"
