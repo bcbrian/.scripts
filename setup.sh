@@ -1,33 +1,10 @@
-clear;
-echo "MMMWN0xoc:;;;;;;;;;;;;;;;;;;;;:cox0NWMMM";
-echo "MWXx;.                            .;xXWM";
-echo "WO:.             .........          .:0W";
-echo "0:.          ...........  ....       .:0";
-echo "d.         .''...     .....   ..      .x";
-echo "o.       ..'.             ..    ..    .o";
-echo "o.     ....                ..    ..   .o";
-echo "o.    ....    .             ..    ..  .o";
-echo "o.   .. ..  .. ..           ..    ..  .o";
-echo "o.   ..... ..  ..           ..     .  .o";
-echo "o.    ...  .. ..            ..     .  .o";
-echo "o.    ...                 ...     ..  .o";
-echo "o.   ..                 ...       ..  .o";
-echo "o.  ..     ...     .....          .   .o";
-echo "d.  .. ..     .....              ..   .d";
-echo "k'  ...                         ..    'k";
-echo "Xo.                            ..    .dN";
-echo "MNx;.                              .;kNM";
-echo "MMWXkl,..........................,lkXWMM";
-echo "MMMMMWKOxdoooooooooooooooooooodxOKNMMMMM";
+##############
+# SHOW LOGOS #
+##############
+curl -o- https://raw.githubusercontent.com/bcbrian/.scripts/main/setup/logo.sh | bash
+#######################
+# START SETUP TOOLING #
+#######################
+curl -o- https://raw.githubusercontent.com/bcbrian/.scripts/main/setup/git.sh | bash
 
-echo "****************************************";
-echo "|    ╭━━━╮╱╱╱╱╭╮╱╱╱╭━━━╮               |";
-echo "|    ┃╭━╮┃╱╱╱╱┃┃╱╱╱┃╭━╮┃               |";
-echo "|    ┃┃╱╰╋━━┳━╯┣━━╮┃╰━━┳━━┳━━┳━━┳━━╮   |";
-echo "|    ┃┃╱╭┫╭╮┃╭╮┃┃━┫╰━━╮┃╭╮┃╭╮┃╭╮┃━━┫   |";
-echo "|    ┃╰━╯┃╰╯┃╰╯┃┃━┫┃╰━╯┃╭╮┃╰╯┃╭╮┣━━┃   |";
-echo "|    ╰━━━┻━━┻━━┻━━╯╰━━━┻╯╰┻━╮┣╯╰┻━━╯   |";
-echo "|    ╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╭━╯┃         |";
-echo "|    ╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╰━━╯         |";
-echo "****************************************";
 
