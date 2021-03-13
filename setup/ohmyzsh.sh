@@ -9,7 +9,7 @@ if $(command -v ohmyzsh >/dev/null)
         echo "*********************"
         echo "* prereqs installed *"
         echo "*********************"        
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
       else
         echo "*************************"
         echo "* prereqs not installed *"
