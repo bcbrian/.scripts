@@ -15,6 +15,7 @@ curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
 source ~/.zshrc
 chmod u+x nvim.appimage < /dev/tty
 ./nvim.appimage --appimage-extract < /dev/tty
+mv squashfs-root / && ln -s /squashfs-root/AppRun /usr/bin/nvim < /dev/tty
 source ~/.zshrc 
 sudo update-alternatives --install /usr/bin/vi vi /squashfs-root/usr/share/nvim 60 < /dev/tty
 sudo update-alternatives --config vi < /dev/tty
