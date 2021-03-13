@@ -1,5 +1,4 @@
-version=$(git --version || false)
-if [[ version ]]
+if $(command -v git >/dev/null )
 then
   echo "*****************"
   echo "* git installed *"
