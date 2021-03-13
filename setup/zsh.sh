@@ -11,13 +11,6 @@ else
   echo "******************"
   echo "* installing zsh *"
   echo "******************"
-  echo "******************"
-  echo "******************"
-  echo "******************"
-  echo "******************"
-  echo "******************"
-  echo "******************"
-  exit 1
   sudo apt update
   sudo apt install zsh
   zsh --version
