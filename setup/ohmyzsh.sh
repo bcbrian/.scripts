@@ -4,7 +4,7 @@ if $(command -v ohmyzsh >/dev/null)
     echo "* ohmyzsh installed *"
     echo "*********************"
   else
-    if [[ $(command -v zsh >/dev/null) && $(command -v git >/dev/null) ]]
+    if $(command -v zsh >/dev/null) && $(command -v git >/dev/null)
       then
         echo "*********************"
         echo "* prereqs installed *"
