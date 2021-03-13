@@ -1,4 +1,4 @@
-if $(! -d "~/.oh-my-zsh")
+if [ -d ~/.oh-my-zsh ]
   then
     echo "*********************"
     echo "* ohmyzsh installed *"
