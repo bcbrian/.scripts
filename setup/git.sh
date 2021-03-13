@@ -15,7 +15,7 @@ else
   if [[ $OSTYPE == "linux-gnu" ]]
     then 
       sudo apt update
-      sudo apt install git
+      sudo apt install git < /dev/tty
     else 
       echo "Not supported yet please install git before continuing." 
   fi
