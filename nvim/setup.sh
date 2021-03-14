@@ -11,8 +11,7 @@ source ~/.zshrc
 pyenv install 3.7.1
 pyenv virtualenv 3.7.1 neovim3
 pyenv activate neovim3
-curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
-source ~/.zshrc
+curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 chmod u+x nvim.appimage
 ./nvim.appimage --appimage-extract
 mv squashfs-root / && ln -s /squashfs-root/AppRun /usr/bin/nvim
