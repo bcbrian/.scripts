@@ -5,4 +5,5 @@
 " source ~/.scripts/nvim/init.vim
 
 " load default setup
-source ./sets.vim;
+source ~/.scripts/nvim/sets.vim
+source ~/.scripts/nvim/plugs.vim
