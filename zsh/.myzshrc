@@ -2,7 +2,7 @@
 # if [ -r /c/Users/brian/.scripts/zsh/.myzshrc ]; then
 #     source /c/Users/brian/.scripts/zsh/.myzshrc
 # fi
-
+cd ~
 # logo 
 sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/logo.sh)"
 
