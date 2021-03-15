@@ -1,7 +1,7 @@
 " ~/.config/nvim/init.vim with the following content:
 " set runtimepath^=/.vim runtimepath+=~/.vim/after
 " let &packpath = &runtimepath
-" source ~/.vimrc
+" source ~/.scripts/nvim/init.vim
 
 " https://www.reddit.com/r/neovim/comments/4r9kwa/change_vim_and_vi_command_to_nvim/"
 

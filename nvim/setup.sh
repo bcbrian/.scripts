@@ -22,4 +22,16 @@ source ~/.zshrc
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 touch ~/.config/nvim/init.vim
+echo '" load scripts file'
+echo "set runtimepath^=/.vim runtimepath+=~/.vim/after"
+echo "let &packpath = &runtimepath"
+echo "source ~/.source/nvim/init.vim"
 source ~/.zshrc
+
+# we just setup what i think is required now some fun helpful things
+sudo apt install -y bat
+mkdir -p ~/.local/bin
+ln -s /usr/bin/batcat ~/.local/bin/bat
+sudo apt install -y fd-find
+ln -s $(which fdfind) ~/.local/bin/fd
+sudo apt-get install -y ripgrep
