@@ -1,5 +1,6 @@
 set exrc
 set guicursor=
+" set guicursor=v-c-sm-n-i-ci:block,ve:ver25,r-cr-o:hor20
 set relativenumber
 set nohlsearch
 set hidden
@@ -65,6 +66,8 @@ nnoremap ; :
 " Use Q to execute default register.
 nnoremap Q @q
 
+" Paste competetion
+nnoremap <Leader>v <C-V>
 
 " More natural splits
 set splitbelow          " Horizontal split below current.
@@ -73,7 +76,7 @@ nnoremap <Leader>j <C-W><C-J>
 nnoremap <Leader>k <C-W><C-K>
 nnoremap <Leader>l <C-W><C-L>
 nnoremap <Leader>h <C-W><C-H>
-nnoremap <Leader>v <C-W><C-V>
+nnoremap <Leader>d <C-W><C-V>
 nnoremap <Leader>e <C-W><C-S>
 
 " Use <C-L> to clear the highlighting of :set hlsearch.
