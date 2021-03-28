@@ -61,8 +61,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>p  <Plug>(coc-format-selected)
-nmap <leader>p  <Plug>(coc-format-selected)
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+xmap <leader>p :Prettier<CR>
+nmap <leader>p :Prettier<CR>
 
 augroup mygroup
   autocmd!
