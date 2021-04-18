@@ -1,5 +1,5 @@
 " Things I am adding for some setup stuff
-" :CocInstall coc-json coc-tsserver
+" :CocInstall coc-json coc-tsserver coc-prettier
 " set filetypes as typescriptreact
 autocmd BufNewFile,BufRead *.jsx set filetype=javascriptreact
 autocmd BufNewFile,BufRead *.tsx set filetype=typescriptreact
