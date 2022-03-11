@@ -8,6 +8,7 @@ else
   echo "*******************"
   echo "* installing java *"
   echo "*******************"
-  sudo apt install default-jre
-  sudo apt install default-jdk
+  sudo apt update
+  sudo apt -y install default-jre
+  sudo apt -y install default-jdk
 fi
