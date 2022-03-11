@@ -11,6 +11,7 @@ curl --silent -o- https://scripts.codesagas.dev/setup/git.sh | bash
 curl --silent -o- https://scripts.codesagas.dev/setup/zsh.sh | bash
 curl --silent -o- https://scripts.codesagas.dev/setup/ohmyzsh.sh | zsh
 curl --silent -o- https://scripts.codesagas.dev/setup/nvm.sh | zsh
+curl --silent -o- https://scripts.codesagas.dev/setup/dev.sh | zsh
 curl --silent -o- https://scripts.codesagas.dev/setup/nvim.sh | zsh
 zsh
 source ~/.zshrc

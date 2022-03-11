@@ -34,3 +34,5 @@ fi
 
 # NVIM things
 PATH=$PATH:~/.local/bin
+export npm_config_user=root
+export NPM_CONFIG_USER=root
