@@ -9,11 +9,11 @@ echo "**********************************"
 echo "* tree-sitter + C compiler deps  *"
 echo "**********************************"
 
-# tree-sitter-cli
+# tree-sitter-cli (nvim-treesitter needs the CLI, not just the library)
 if ! $(command -v tree-sitter >/dev/null 2>&1); then
   if $(command -v brew >/dev/null 2>&1); then
-    echo "Installing tree-sitter via Homebrew..."
-    brew install tree-sitter 2>/dev/null || true
+    echo "Installing tree-sitter-cli via Homebrew..."
+    brew install tree-sitter-cli 2>/dev/null || true
   elif $(command -v npm >/dev/null 2>&1); then
     echo "Installing tree-sitter-cli via npm..."
     npm install -g tree-sitter-cli 2>/dev/null || true
