@@ -19,8 +19,13 @@ echo "**************************"
 echo "* updating .scripts      *"
 echo "**************************"
 
+git -C "$SCRIPTS_DIR" pull
+
 # Run all setup scripts (same as initial setup - single source of truth)
 bash "$SCRIPTS_DIR/setup/run-setup-scripts.sh"
+
+# Ensure nvim is compatible with LazyVim (>= 0.11.2) before syncing
+bash "$SCRIPTS_DIR/setup/nvim.sh"
 
 # Sync LazyVim plugins (installs any new plugins from updated lazy.lua)
 if [[ -f "$SCRIPTS_DIR/lazyvim/lua/config/lazy.lua" ]] && $(command -v nvim >/dev/null 2>&1); then
