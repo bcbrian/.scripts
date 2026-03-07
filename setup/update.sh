@@ -4,6 +4,7 @@
 # Pull latest and re-run setup scripts to apply changes.
 # Use when you already have the repo and want to "finish the init" or sync updates.
 
+export SKIP_LOGO=1
 source ~/.zshrc 2>/dev/null || true
 
 SCRIPTS_DIR="${SCRIPTS_DIR:-$HOME/.scripts}"

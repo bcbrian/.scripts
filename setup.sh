@@ -1,6 +1,7 @@
 ##############
 # SHOW LOGOS #
 ##############
+export SKIP_LOGO=1
 cd ~
 clear
 

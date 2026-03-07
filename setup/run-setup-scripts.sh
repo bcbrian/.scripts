@@ -3,6 +3,7 @@
 ##############
 # Used by both setup.sh and update.sh.
 
+export SKIP_LOGO=1
 source ~/.zshrc 2>/dev/null || true
 
 SCRIPTS_DIR="${SCRIPTS_DIR:-$HOME/.scripts}"

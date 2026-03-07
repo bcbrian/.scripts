@@ -6,8 +6,8 @@
 ORIGINAL_DIR=$(pwd)
 cd ~        
 
-# logo (only when interactive - skip when sourced by scripts)
-[[ -t 0 ]] && sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/logo.sh)"
+# logo (skip when SKIP_LOGO=1, e.g. during update/setup)
+[[ -z "$SKIP_LOGO" ]] && sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/logo.sh)"
 
 # Auto-update .scripts once per 24hrs (throttle file is gitignored, local to each machine)
 LAST_PULL_FILE="$HOME/.scripts/.last-auto-pull"
