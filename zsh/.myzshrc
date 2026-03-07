@@ -2,9 +2,28 @@
 # if [ -r /c/Users/brian/.scripts/zsh/.myzshrc ]; then
 #     source /c/Users/brian/.scripts/zsh/.myzshrc
 # fi
-cd ~
+# Store original directory before changing to root
+ORIGINAL_DIR=$(pwd)
+cd ~        
+
 # logo 
 sh -c "$(curl -fsSL https://scripts.codesagas.dev/setup/logo.sh)"
+
+# Auto-update .scripts once per 24hrs (throttle file is gitignored, local to each machine)
+LAST_PULL_FILE="$HOME/.scripts/.last-auto-pull"
+if [[ -d "$HOME/.scripts/.git" ]]; then
+  DO_PULL=0
+  if [[ ! -f "$LAST_PULL_FILE" ]]; then
+    DO_PULL=1
+  else
+    LAST=$(cat "$LAST_PULL_FILE" 2>/dev/null)
+    NOW=$(date +%s)
+    [[ -n "$LAST" ]] && (( NOW - LAST > 86400 )) && DO_PULL=1
+  fi
+  if (( DO_PULL )); then
+    (cd "$HOME/.scripts" && git pull --rebase 2>/dev/null && echo "$(date +%s)" > "$LAST_PULL_FILE") &
+  fi
+fi
 
 # NVM
 alias oldvim="/usr/bin/vim"
@@ -32,7 +51,9 @@ if $(command -v node >/dev/null )
         nvm install node
 fi
 
-# NVIM things
-PATH=$PATH:~/.local/bin
+# NVIM things (and Cursor Agent CLI)
+[[ ":$PATH:" != *":$HOME/.local/bin:"* ]] && export PATH="$HOME/.local/bin:$PATH"
 export npm_config_user=root
 export NPM_CONFIG_USER=root
+
+cd "$ORIGINAL_DIR"

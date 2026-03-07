@@ -1,0 +1,2 @@
+# Local throttle file - one auto-pull per 24hrs per machine
+.last-auto-pull
