@@ -1,10 +1,11 @@
 ##############
 # clone .scripts #
 ##############
+# Requires git, gh, and gh-auth first. Uses gh repo clone for initial clone.
 
 source ~/.zshrc 2>/dev/null || true
 
-SCRIPTS_REPO="${SCRIPTS_REPO:-https://github.com/bcbrian/.scripts.git}"
+SCRIPTS_GH_REPO="${SCRIPTS_GH_REPO:-bcbrian/.scripts}"
 SCRIPTS_DIR="${SCRIPTS_DIR:-$HOME/.scripts}"
 
 if [[ -d "$SCRIPTS_DIR" ]] && [[ -d "$SCRIPTS_DIR/.git" ]]
@@ -19,9 +20,9 @@ else
   echo "* cloning .scripts repo  *"
   echo "**************************"
 
-  if ! $(command -v git >/dev/null)
+  if ! $(command -v gh >/dev/null)
   then
-    echo "Git required. Run git setup first."
+    echo "gh CLI required. Run gh setup first."
     exit 1
   fi
 
@@ -31,6 +32,6 @@ else
     rm -rf "$SCRIPTS_DIR"
   fi
 
-  git clone "$SCRIPTS_REPO" "$SCRIPTS_DIR"
+  gh repo clone "$SCRIPTS_GH_REPO" "$SCRIPTS_DIR"
   echo ".scripts cloned to $SCRIPTS_DIR"
 fi

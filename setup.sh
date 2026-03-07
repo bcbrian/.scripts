@@ -3,20 +3,22 @@
 ##############
 cd ~
 clear
-curl --silent -o- https://scripts.codesagas.dev/setup/logo.sh | bash
+
+# Bootstrap: fetch from repo (raw GitHub) so we always use latest
+SCRIPTS_RAW="${SCRIPTS_RAW:-https://raw.githubusercontent.com/bcbrian/.scripts/main}"
+curl --silent -o- "$SCRIPTS_RAW/setup/logo.sh" | bash
 #######################
 # START SETUP TOOLING #
 #######################
-curl --silent -o- https://scripts.codesagas.dev/setup/git.sh | bash
-curl --silent -o- https://scripts.codesagas.dev/setup/gh.sh | bash
-curl --silent -o- https://scripts.codesagas.dev/setup/gh-auth.sh | bash
-curl --silent -o- https://scripts.codesagas.dev/setup/clone-scripts.sh | bash
-curl --silent -o- https://scripts.codesagas.dev/setup/zsh.sh | bash
-curl --silent -o- https://scripts.codesagas.dev/setup/ohmyzsh.sh | zsh
-curl --silent -o- https://scripts.codesagas.dev/setup/nvm.sh | zsh
-curl --silent -o- https://scripts.codesagas.dev/setup/nvim.sh | zsh
-curl --silent -o- https://scripts.codesagas.dev/setup/cursor.sh | bash
-curl --silent -o- https://scripts.codesagas.dev/setup/lazyvim.sh | zsh
+curl --silent -o- "$SCRIPTS_RAW/setup/git.sh" | bash
+curl --silent -o- "$SCRIPTS_RAW/setup/gh.sh" | bash
+curl --silent -o- "$SCRIPTS_RAW/setup/gh-auth.sh" | bash
+curl --silent -o- "$SCRIPTS_RAW/setup/clone-scripts.sh" | bash
+
+# Run all setup scripts from repo (single source of truth, same as update)
+SCRIPTS_DIR="${SCRIPTS_DIR:-$HOME/.scripts}"
+bash "$SCRIPTS_DIR/setup/run-setup-scripts.sh"
+
 zsh
 source ~/.zshrc
 

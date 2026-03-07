@@ -18,12 +18,8 @@ echo "**************************"
 echo "* updating .scripts      *"
 echo "**************************"
 
-# Pull latest (clone-scripts does this when repo exists)
-bash "$SCRIPTS_DIR/setup/clone-scripts.sh"
-
-# Re-run setup scripts that apply config (idempotent - skip what's already done)
-bash "$SCRIPTS_DIR/setup/lazyvim.sh"
-bash "$SCRIPTS_DIR/setup/cursor.sh"
+# Run all setup scripts (same as initial setup - single source of truth)
+bash "$SCRIPTS_DIR/setup/run-setup-scripts.sh"
 
 # Sync LazyVim plugins (installs any new plugins from updated lazy.lua)
 if [[ -f "$SCRIPTS_DIR/lazyvim/lua/config/lazy.lua" ]] && $(command -v nvim >/dev/null 2>&1); then
