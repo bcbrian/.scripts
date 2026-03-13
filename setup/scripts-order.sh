@@ -11,6 +11,7 @@ SETUP_SCRIPTS=(
   "zsh.sh"
   "ohmyzsh.sh"
   "nvm.sh"
+  "bun.sh"
   "nvim.sh"
   "lazyvim-deps.sh"
   "lazygit.sh"

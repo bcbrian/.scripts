@@ -52,6 +52,11 @@ if $(command -v node >/dev/null )
         nvm install node
 fi
 
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+[[ ":$PATH:" != *":$BUN_INSTALL/bin:"* ]] && export PATH="$BUN_INSTALL/bin:$PATH"
+[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
+
 # NVIM things (and Cursor Agent CLI)
 [[ ":$PATH:" != *":$HOME/.local/bin:"* ]] && export PATH="$HOME/.local/bin:$PATH"
 export npm_config_user=root
