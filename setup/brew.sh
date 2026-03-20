@@ -13,7 +13,10 @@ else
   echo "***********************"
 
   if [[ "$OSTYPE" == darwin* ]] || [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # Download then run separately so the installer can prompt for sudo via TTY
+    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh -o /tmp/brew-install.sh
+    /bin/bash /tmp/brew-install.sh </dev/tty
+    rm -f /tmp/brew-install.sh
 
     # Add brew to PATH for the rest of this session
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
