@@ -4,6 +4,7 @@
 # Used by both setup.sh and update.sh to avoid drift.
 
 SETUP_SCRIPTS=(
+  "brew.sh"
   "git.sh"
   "gh.sh"
   "gh-auth.sh"
