@@ -10,7 +10,7 @@ SCRIPTS_DIR="${SCRIPTS_DIR:-$HOME/.scripts}"
 source "$SCRIPTS_DIR/setup/scripts-order.sh"
 
 for script in "${SETUP_SCRIPTS[@]}"; do
-  if [[ "$script" == "ohmyzsh.sh" || "$script" == "nvm.sh" ]]; then
+  if [[ "$script" == "ohmyzsh.sh" || "$script" == "nvm.sh" || "$script" == "bun.sh" ]]; then
     zsh "$SCRIPTS_DIR/setup/$script"
   else
     bash "$SCRIPTS_DIR/setup/$script"
