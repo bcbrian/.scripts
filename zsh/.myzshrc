@@ -45,11 +45,47 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-if nvm which default &>/dev/null; then
-    nvm use default
-else
+if ! nvm which default &>/dev/null; then
     nvm install --lts --default
 fi
+
+# Auto-switch Node version based on .nvmrc
+_nvm_auto_use() {
+  if [[ -f .nvmrc ]]; then
+    local nvmrc_node_version=$(cat .nvmrc)
+    if ! nvm which "$nvmrc_node_version" &>/dev/null; then
+      nvm install "$nvmrc_node_version"
+    fi
+    nvm use
+  else
+    # No .nvmrc — revert to default
+    local current=$(nvm current)
+    local default_version=$(nvm version default)
+    if [[ "$current" != "$default_version" ]]; then
+      nvm use default
+    fi
+  fi
+}
+
+# Track .nvmrc content to detect changes from git checkout, etc.
+_NVM_LAST_NVMRC_CONTENT=""
+
+_nvm_check_nvmrc_changed() {
+  local current_content=""
+  [[ -f .nvmrc ]] && current_content=$(cat .nvmrc)
+  if [[ "$current_content" != "$_NVM_LAST_NVMRC_CONTENT" ]]; then
+    _NVM_LAST_NVMRC_CONTENT="$current_content"
+    _nvm_auto_use
+  fi
+}
+
+# Auto-switch before each prompt — catches cd, git checkout, file changes, etc.
+autoload -U add-zsh-hook
+add-zsh-hook precmd _nvm_check_nvmrc_changed
+
+# Run once on shell startup
+_NVM_LAST_NVMRC_CONTENT=""
+_nvm_check_nvmrc_changed
 
 # Bun
 export BUN_INSTALL="$HOME/.bun"
