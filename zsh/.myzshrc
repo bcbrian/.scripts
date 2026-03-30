@@ -83,9 +83,10 @@ _nvm_check_nvmrc_changed() {
 autoload -U add-zsh-hook
 add-zsh-hook precmd _nvm_check_nvmrc_changed
 
-# Run once on shell startup
+# Run once on shell startup — always apply, not gated by content-change check
+_nvm_auto_use
 _NVM_LAST_NVMRC_CONTENT=""
-_nvm_check_nvmrc_changed
+[[ -f .nvmrc ]] && _NVM_LAST_NVMRC_CONTENT=$(cat .nvmrc)
 
 # Bun
 export BUN_INSTALL="$HOME/.bun"
