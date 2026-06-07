@@ -12,30 +12,28 @@ nvim_meets_requirement() {
 }
 
 do_install_nvim() {
-  if [[ "$OSTYPE" == darwin* ]] && $(command -v brew >/dev/null 2>&1); then
+  if command -v brew >/dev/null 2>&1; then
     brew install neovim
-  elif [[ "$OSTYPE" == "linux-gnu"* ]] && $(command -v brew >/dev/null 2>&1); then
-    brew install neovim
-  elif $(command -v apt-get >/dev/null 2>&1); then
-    sudo apt-get update -qq 2>/dev/null || true
-    sudo apt-get install -y neovim 2>/dev/null || true
   else
-    echo "Install neovim manually: brew install neovim or apt install neovim"
+    echo "brew required. brew.sh should have installed it first."
     exit 1
   fi
+  # --- apt fallback (commented while standardizing on brew) ---
+  # Note: Ubuntu's apt neovim is usually < 0.11.2 and breaks LazyVim.
+  # elif $(command -v apt-get >/dev/null 2>&1); then
+  #   sudo apt-get update -qq 2>/dev/null || true
+  #   sudo apt-get install -y neovim 2>/dev/null || true
 }
 
 do_upgrade_nvim() {
-  if [[ "$OSTYPE" == darwin* ]] && $(command -v brew >/dev/null 2>&1); then
+  if command -v brew >/dev/null 2>&1; then
     brew update -q
     brew upgrade neovim || brew install neovim
-  elif [[ "$OSTYPE" == "linux-gnu"* ]] && $(command -v brew >/dev/null 2>&1); then
-    brew update -q
-    brew upgrade neovim || brew install neovim
-  elif $(command -v apt-get >/dev/null 2>&1); then
-    sudo apt-get update -qq
-    sudo apt-get install -y --only-upgrade neovim
   fi
+  # --- apt fallback (commented while standardizing on brew) ---
+  # elif $(command -v apt-get >/dev/null 2>&1); then
+  #   sudo apt-get update -qq
+  #   sudo apt-get install -y --only-upgrade neovim
 }
 
 if ! $(command -v nvim >/dev/null 2>&1); then

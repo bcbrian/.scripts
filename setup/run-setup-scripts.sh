@@ -15,4 +15,17 @@ for script in "${SETUP_SCRIPTS[@]}"; do
   else
     bash "$SCRIPTS_DIR/setup/$script"
   fi
+
+  # Each script runs in its own process, so brew.sh's PATH eval doesn't carry
+  # over. After brew installs, put it on PATH here so every later script (run
+  # as a fresh process) can find brew.
+  if [[ "$script" == "brew.sh" ]]; then
+    if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    elif [[ -x /opt/homebrew/bin/brew ]]; then
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [[ -x /usr/local/bin/brew ]]; then
+      eval "$(/usr/local/bin/brew shellenv)"
+    fi
+  fi
 done

@@ -16,12 +16,12 @@ echo "**********************"
 
 if $(command -v brew >/dev/null 2>&1); then
   brew install lazygit 2>/dev/null || true
-elif $(command -v apt-get >/dev/null 2>&1); then
-  sudo apt-get update -qq 2>/dev/null || true
-  sudo apt-get install -y lazygit 2>/dev/null || true
 else
-  echo "No brew or apt found. Install manually:"
-  echo "  https://github.com/jesseduffield/lazygit#installation"
+  echo "brew required. brew.sh should have installed it first."
+  echo "  Manual: https://github.com/jesseduffield/lazygit#installation"
+  # --- apt fallback (commented while standardizing on brew; no standard apt package) ---
+  # sudo apt-get update -qq 2>/dev/null || true
+  # sudo apt-get install -y lazygit 2>/dev/null || true
   exit 0
 fi
 

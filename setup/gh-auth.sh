@@ -20,5 +20,10 @@ else
   echo "* logging in to gh       *"
   echo "**************************"
   echo "Follow the prompts (browser or token). Choose SSH when asked to set up git credentials."
-  gh auth login
+  # Read from the terminal even when the outer setup was piped (curl | bash).
+  if [[ -e /dev/tty ]]; then
+    gh auth login </dev/tty
+  else
+    gh auth login
+  fi
 fi

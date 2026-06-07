@@ -59,17 +59,5 @@ else
   fi
 fi
 
-# Cursor Agent CLI (agent command for terminal/headless use)
-if ! $(command -v agent >/dev/null)
-then
-  echo "******************************"
-  echo "* installing Cursor Agent CLI *"
-  echo "******************************"
-  curl https://cursor.com/install -fsS | bash
-  # Agent CLI installs to ~/.local/bin - ensure it's in PATH
-  [[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
-else
-  echo "*******************************"
-  echo "* Cursor Agent CLI installed *"
-  echo "*******************************"
-fi
+# Cursor Agent CLI lives in its own script now (setup/cursor-agent.sh) so a
+# future headless/server profile can install the agent without the GUI app.
