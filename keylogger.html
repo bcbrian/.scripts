@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Key Event Logger</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --down: #2ea043;
+    --up: #6e7681;
+    --accent: #58a6ff;
+    --warn: #f0883e;
+    --hot: #db61a2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 18px;
+  }
+  h1 { margin: 0 0 8px; font-size: 16px; }
+  .hint { color: var(--muted); font-size: 12px; margin: 0 0 12px; }
+  .bar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  input#focus {
+    flex: 1 1 260px;
+    min-width: 200px;
+    background: var(--bg);
+    border: 1px solid var(--accent);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 6px;
+    font: inherit;
+  }
+  button {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 9px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font: inherit;
+  }
+  button:hover { border-color: var(--accent); }
+  label.toggle { color: var(--muted); display: flex; gap: 6px; align-items: center; cursor: pointer; user-select: none; }
+  .count { color: var(--muted); margin-left: auto; }
+  .count b { color: var(--text); }
+  .live {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 14px 18px 0;
+    font-size: 22px;
+    min-height: 30px;
+    letter-spacing: 1px;
+  }
+  .live .mod { color: var(--accent); }
+  .live .none { color: var(--muted); font-size: 14px; }
+  table { width: calc(100% - 36px); margin: 14px 18px 40px; border-collapse: collapse; }
+  th, td { text-align: left; padding: 5px 10px; border-bottom: 1px solid #21262d; white-space: nowrap; }
+  th { color: var(--muted); font-weight: 600; position: sticky; top: 0; }
+  td.type-down { color: var(--down); font-weight: 700; }
+  td.type-up { color: var(--up); }
+  td.code { color: var(--accent); }
+  td.repeat { color: var(--warn); }
+  tr.fast td.delta { color: var(--hot); font-weight: 700; }
+  tr.fast { background: rgba(219,97,162,0.08); }
+  .mods-on { color: var(--warn); }
+  .legend { color: var(--muted); font-size: 11px; margin: 6px 18px 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Key Event Logger</h1>
+  <p class="hint">
+    Click the field, then press keys / combos. Logs every keydown &amp; keyup the
+    <b>browser</b> receives (i.e. what a real app sees after the OS &amp; Karabiner).
+    Pink rows = under 50&nbsp;ms since the previous event (double-fire signature).
+  </p>
+  <div class="bar">
+    <input id="focus" placeholder="Click here and start pressing keys…" autofocus />
+    <label class="toggle"><input type="checkbox" id="prevent" checked /> preventDefault</label>
+    <button id="clear">Clear</button>
+    <button id="copy">Copy log</button>
+    <span class="count">events: <b id="n">0</b></span>
+  </div>
+  <div class="legend">
+    <b>code</b> = physical key (AltLeft vs AltRight, MetaLeft, Space…). <b>loc</b> = 1 left · 2 right · 3 numpad. <b>Δms</b> = gap from previous event.
+  </div>
+</header>
+
+<div class="live" id="live"><span class="none">waiting for input…</span></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th><th>Δms</th><th>type</th><th>key</th><th>code</th>
+      <th>loc</th><th>keyCode</th><th>modifiers</th><th>repeat</th>
+    </tr>
+  </thead>
+  <tbody id="rows"></tbody>
+</table>
+
+<script>
+  const rows = document.getElementById('rows');
+  const live = document.getElementById('live');
+  const nEl = document.getElementById('n');
+  const focus = document.getElementById('focus');
+  const prevent = document.getElementById('prevent');
+
+  let count = 0;
+  let last = null;
+
+  const LOC = { 0: 'std', 1: 'left', 2: 'right', 3: 'numpad' };
+
+  function mods(e) {
+    const m = [];
+    if (e.metaKey) m.push('⌘ Meta');
+    if (e.ctrlKey) m.push('⌃ Ctrl');
+    if (e.altKey) m.push('⌥ Alt');
+    if (e.shiftKey) m.push('⇧ Shift');
+    return m;
+  }
+
+  function symbolize(e) {
+    const m = [];
+    if (e.metaKey) m.push('⌘');
+    if (e.ctrlKey) m.push('⌃');
+    if (e.altKey) m.push('⌥');
+    if (e.shiftKey) m.push('⇧');
+    const key = e.code === 'Space' ? 'Space' : (e.key === ' ' ? 'Space' : e.key);
+    return { chord: m, key };
+  }
+
+  function showLive(e) {
+    const { chord, key } = symbolize(e);
+    const parts = chord.map(c => `<span class="mod">${c}</span>`).join(' + ');
+    live.innerHTML = (parts ? parts + ' + ' : '') + `<b>${escapeHtml(key)}</b>`;
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  }
+
+  function record(type, e) {
+    if (prevent.checked) e.preventDefault();
+    const now = performance.now();
+    const delta = last === null ? 0 : Math.round(now - last);
+    last = now;
+    count++;
+    nEl.textContent = count;
+
+    if (type === 'down') showLive(e);
+
+    const activeMods = mods(e).join('  ');
+    const tr = document.createElement('tr');
+    if (delta > 0 && delta < 50) tr.className = 'fast';
+    tr.innerHTML = `
+      <td>${count}</td>
+      <td class="delta">${count === 1 ? '—' : delta}</td>
+      <td class="type-${type}">${type}</td>
+      <td>${escapeHtml(e.key === ' ' ? '␣ (space)' : e.key)}</td>
+      <td class="code">${escapeHtml(e.code)}</td>
+      <td>${LOC[e.location] ?? e.location}</td>
+      <td>${e.keyCode}</td>
+      <td class="${activeMods ? 'mods-on' : ''}">${activeMods || '—'}</td>
+      <td class="${e.repeat ? 'repeat' : ''}">${e.repeat ? 'REPEAT' : ''}</td>`;
+    rows.insertBefore(tr, rows.firstChild);
+  }
+
+  // capture phase, on document, so we catch everything regardless of focus target
+  document.addEventListener('keydown', e => record('down', e), true);
+  document.addEventListener('keyup', e => record('up', e), true);
+
+  document.getElementById('clear').addEventListener('click', () => {
+    rows.innerHTML = '';
+    count = 0; last = null;
+    nEl.textContent = '0';
+    live.innerHTML = '<span class="none">waiting for input…</span>';
+    focus.focus();
+  });
+
+  document.getElementById('copy').addEventListener('click', () => {
+    const lines = [...rows.children].reverse().map(tr =>
+      [...tr.children].map(td => td.textContent.trim()).join('\t')
+    );
+    navigator.clipboard.writeText('#\tΔms\ttype\tkey\tcode\tloc\tkeyCode\tmodifiers\trepeat\n' + lines.join('\n'));
+  });
+
+  focus.focus();
+</script>
+</body>
+</html>

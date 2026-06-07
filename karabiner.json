@@ -162,29 +162,11 @@
                                 ]
                             },
                             {
-                                "description": "Play/Pause: consume duplicate within debounce window",
-                                "type": "basic",
-                                "from": { "consumer_key_code": "play_or_pause" },
-                                "to": [],
-                                "conditions": [
-                                    {
-                                        "type": "expression_if",
-                                        "expression": "play_pause_lockout > system.now.milliseconds"
-                                    }
-                                ]
-                            },
-                            {
                                 "description": "Layer 1: Play/Pause → Ctrl+C",
                                 "type": "basic",
                                 "from": { "consumer_key_code": "play_or_pause" },
                                 "to": [
-                                    { "key_code": "c", "modifiers": ["left_control"] },
-                                    {
-                                        "set_variable": {
-                                            "name": "play_pause_lockout",
-                                            "expression": "system.now.milliseconds + 150"
-                                        }
-                                    }
+                                    { "key_code": "c", "modifiers": ["left_control"] }
                                 ],
                                 "conditions": [
                                     {
@@ -203,25 +185,10 @@
                                     "basic.to_if_held_down_threshold_milliseconds": 250
                                 },
                                 "to_if_alone": [
-                                    { "key_code": "spacebar", "modifiers": ["left_option"] },
-                                    {
-                                        "set_variable": {
-                                            "name": "play_pause_lockout",
-                                            "expression": "system.now.milliseconds + 150"
-                                        }
-                                    }
+                                    { "key_code": "spacebar", "modifiers": ["left_option"], "hold_down_milliseconds": 120 }
                                 ],
                                 "to_if_held_down": [
-                                    {
-                                        "key_code": "escape",
-                                        "repeat": false
-                                    },
-                                    {
-                                        "set_variable": {
-                                            "name": "play_pause_lockout",
-                                            "expression": "system.now.milliseconds + 150"
-                                        }
-                                    }
+                                    { "key_code": "escape", "repeat": false }
                                 ]
                             },
                             {
