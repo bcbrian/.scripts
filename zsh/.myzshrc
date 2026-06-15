@@ -104,6 +104,27 @@ export BUN_INSTALL="$HOME/.bun"
 [[ ":$PATH:" != *":$BUN_INSTALL/bin:"* ]] && export PATH="$BUN_INSTALL/bin:$PATH"
 [ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
 
+# yolo — launch an AI agent in full-auto/skip-permissions mode
+# Usage: yolo [claude|cursor|codex] [extra args...]
+yolo() {
+  local agent="${1:-claude}"
+  shift 2>/dev/null || true
+  case "$agent" in
+    claude)
+      claude --dangerously-skip-permissions "$@"
+      ;;
+    cursor)
+      cursor-agent "$@"
+      ;;
+    codex)
+      codex --approval-mode full-auto "$@"
+      ;;
+    *)
+      echo "yolo: unknown agent '$agent'. Available: claude, cursor, codex"
+      ;;
+  esac
+}
+
 # fzf shell integration (ctrl+r history, ctrl+t file picker, alt+c dir jump)
 if command -v fzf >/dev/null 2>&1; then
   eval "$(fzf --zsh)"
