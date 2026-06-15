@@ -13,6 +13,7 @@ SETUP_SCRIPTS=(
   "nvm.sh"
   "bun.sh"
   "java.sh"
+  "pyenv.sh"
   "nvim.sh"
   "lazyvim-deps.sh"
   "lazygit.sh"
