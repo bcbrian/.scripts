@@ -25,4 +25,5 @@ SETUP_SCRIPTS=(
   "claude-code.sh"
   "karabiner.sh"
   "ghostty.sh"
+  "macmon.sh"
 )
