@@ -23,4 +23,5 @@ SETUP_SCRIPTS=(
   "cursor.sh"
   "cursor-agent.sh"
   "claude-code.sh"
+  "karabiner.sh"
 )
