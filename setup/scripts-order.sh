@@ -8,6 +8,7 @@
 SETUP_SCRIPTS=(
   "brew.sh"
   "git.sh"
+  "git-lfs.sh"
   "git-xet.sh"
   "zsh.sh"
   "ohmyzsh.sh"
