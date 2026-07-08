@@ -52,9 +52,10 @@ alias configzsh="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 alias vimrc="cd ~/.scripts && vim ~/.scripts/nvim"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# NVM bootstrap lives in its own file so it can also be sourced from
+# ~/.zshenv (non-interactive shells) without pulling in this file's
+# interactive-only side effects (cd, network logo fetch, auto git pull).
+[ -s "$HOME/.scripts/zsh/.nvm-init.sh" ] && source "$HOME/.scripts/zsh/.nvm-init.sh"
 
 if ! nvm which default &>/dev/null; then
     nvm install --lts --default
