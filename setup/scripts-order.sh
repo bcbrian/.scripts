@@ -11,6 +11,7 @@ SETUP_SCRIPTS=(
   "git-lfs.sh"
   "git-xet.sh"
   "zsh.sh"
+  "zshenv.sh"
   "ohmyzsh.sh"
   "nvm.sh"
   "bun.sh"

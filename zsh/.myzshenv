@@ -1,0 +1,10 @@
+# Loaded for EVERY zsh invocation on this machine — interactive or not,
+# login or not (hooks, scripts, tool subprocesses, cron, plugin lifecycle
+# hooks). Keep this file minimal and side-effect-free: no cd, no network
+# calls, no output. Interactive-only setup (Oh My Zsh, aliases, prompt,
+# logo, auto-update) belongs in .myzshrc, not here.
+
+# Puts node/nvm on PATH for non-interactive shells (e.g. Claude Code /
+# Codex plugin lifecycle hooks, which otherwise silently no-op if node
+# isn't resolvable outside an interactive shell).
+[ -s "$HOME/.scripts/zsh/.nvm-init.sh" ] && source "$HOME/.scripts/zsh/.nvm-init.sh"
