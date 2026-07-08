@@ -143,3 +143,5 @@ export npm_config_user=root
 export NPM_CONFIG_USER=root
 
 cd "$ORIGINAL_DIR"
+
+CLAUDE_CODE_DISABLE_MOUSE_CLICKS=1
