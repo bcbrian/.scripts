@@ -2,3 +2,9 @@
 # https://ghostty.org/docs/config
 theme = Night Owl
 # theme = Catppuccin Frappe
+cursor-style = block
+
+# cmd+, → open this config in vim in the current terminal
+# (open_config uses the OS default GUI app; Ghostty has no keybind to spawn a command,
+#  so send-text types the vim command instead. Needs an idle shell prompt.)
+keybind = cmd+,=text:vim ~/.config/ghostty/config\n
