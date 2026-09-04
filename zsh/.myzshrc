@@ -107,19 +107,26 @@ export BUN_INSTALL="$HOME/.bun"
 [ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
 
 # yolo — launch an AI agent in full-auto/skip-permissions mode
-# Usage: yolo [claude|cursor|codex] [extra args...]
+# Usage: yolo [claude|cursor|codex] [-r|--resume] [extra args...]
 yolo() {
-  local agent="${1:-claude}"
-  shift 2>/dev/null || true
+  local agent="claude"
+  # ponytail: only shift when $1 is a bare word, so `yolo -r` still means claude
+  case "$1" in -*|"") ;; *) agent="$1"; shift ;; esac
+
+  local resume=""
+  case "$1" in
+    -r|--resume) resume=1; shift ;;
+  esac
+
   case "$agent" in
     claude)
-      claude --dangerously-skip-permissions "$@"
+      claude --dangerously-skip-permissions ${resume:+--resume} "$@"
       ;;
     cursor)
-      cursor-agent "$@"
+      cursor-agent ${resume:+--resume} "$@"
       ;;
     codex)
-      codex --approval-mode full-auto "$@"
+      codex --approval-mode full-auto ${resume:+resume} "$@"
       ;;
     *)
       echo "yolo: unknown agent '$agent'. Available: claude, cursor, codex"

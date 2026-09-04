@@ -32,6 +32,10 @@ else
   #   sudo apt-get install -y git 2>/dev/null || true
 fi
 
+## default branch name (vanilla git still defaults to "master"; GitHub/GitLab
+## only changed their own platform default to "main" in 2020)
+git config --global init.defaultBranch main
+
 ## setting up the git user (attended: read from the terminal even when the
 ## outer setup was piped through `curl | bash`)
 
