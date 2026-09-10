@@ -17,6 +17,7 @@ SETUP_SCRIPTS=(
   "bun.sh"
   "java.sh"
   "pyenv.sh"
+  "anyzig.sh"
   "nvim.sh"
   "lazyvim-deps.sh"
   "lazygit.sh"
