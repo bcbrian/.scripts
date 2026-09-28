@@ -23,6 +23,7 @@ SETUP_SCRIPTS=(
   "lazygit.sh"
   "tree-sitter-deps.sh"
   "lazyvim.sh"
+  "poppler.sh"
   "gh.sh"
   "gh-auth.sh"
   "cursor.sh"

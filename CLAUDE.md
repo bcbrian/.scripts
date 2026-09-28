@@ -25,9 +25,11 @@ The `SETUP_SCRIPTS` array in this file controls execution order for both initial
 
 Current order:
 ```
-brew → git → zsh → ohmyzsh → nvm → bun → java
-→ nvim → lazyvim-deps → lazygit → tree-sitter-deps → lazyvim
+brew → git → git-lfs → git-xet → zsh → zshenv → ohmyzsh
+→ nvm → bun → java → pyenv → anyzig
+→ nvim → lazyvim-deps → lazygit → tree-sitter-deps → lazyvim → poppler
 → gh → gh-auth → cursor → cursor-agent → claude-code
+→ karabiner → ghostty → macmon
 ```
 
 ### Each script in `setup/`
