@@ -126,7 +126,7 @@ yolo() {
       cursor-agent ${resume:+--resume} "$@"
       ;;
     codex)
-      codex --approval-mode full-auto ${resume:+resume} "$@"
+      codex ${resume:+resume} --dangerously-bypass-approvals-and-sandbox "$@"
       ;;
     *)
       echo "yolo: unknown agent '$agent'. Available: claude, cursor, codex"

@@ -28,7 +28,7 @@ Current order:
 brew → git → git-lfs → git-xet → zsh → zshenv → ohmyzsh
 → nvm → bun → java → pyenv → anyzig
 → nvim → lazyvim-deps → lazygit → tree-sitter-deps → lazyvim → poppler
-→ gh → gh-auth → cursor → cursor-agent → claude-code
+→ gh → gh-auth → cursor → cursor-agent → claude-code → codex
 → karabiner → ghostty → macmon
 ```
 

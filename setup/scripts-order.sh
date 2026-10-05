@@ -29,6 +29,7 @@ SETUP_SCRIPTS=(
   "cursor.sh"
   "cursor-agent.sh"
   "claude-code.sh"
+  "codex.sh"
   "karabiner.sh"
   "ghostty.sh"
   "macmon.sh"
