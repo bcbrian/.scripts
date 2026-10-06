@@ -58,9 +58,24 @@ alias vimrc="cd ~/.scripts && vim ~/.scripts/nvim"
 # interactive-only side effects (cd, network logo fetch, auto git pull).
 [ -s "$HOME/.scripts/zsh/.nvm-init.sh" ] && source "$HOME/.scripts/zsh/.nvm-init.sh"
 
-if ! nvm which default &>/dev/null; then
+# Soft-fail when nvm is missing: warn, point at fix-nvm, skip the nvm hooks below.
+if command -v nvm >/dev/null; then
+  if ! nvm which default &>/dev/null; then
     nvm install --lts --default
+  fi
+else
+  echo "⚠️  nvm not found. This setup requires nvm to manage node."
+  if command -v node >/dev/null; then
+    echo "   A non-nvm node is on PATH ($(whence -p node)) — remove it so it doesn't compete with nvm."
+  fi
+  echo "   Run 'fix-nvm' to have an agent sort it out, then 'update'."
 fi
+
+# Hands the nvm problem to an agent with enough context to fix it.
+# Usage: fix-nvm [claude|cursor|codex]
+fix-nvm() {
+  yolo "${1:-claude}" "This machine's dev setup (~/.scripts, see CLAUDE.md) requires nvm (installed at ~/.nvm, loaded by ~/.scripts/zsh/.nvm-init.sh) to manage node. nvm is not installed or not loading. Any node not under ~/.nvm (e.g. Homebrew's 'node' formula, /usr/local/bin/node, an apt/system node, or a node.js .pkg install) competes with nvm on PATH and must be removed first. Steps: 1) diagnose with 'whence -a node npm', 'ls ~/.nvm', 'brew list --formula | grep -i node', and check for brew formulae that depend on node ('brew uses --installed node'). 2) Before removing, list global npm packages ('npm ls -g --depth=0') so they can be reinstalled under nvm. 3) Remove the non-nvm node (ask me before uninstalling anything that other packages depend on). 4) Run 'zsh ~/.scripts/setup/nvm.sh' to install nvm, then confirm 'nvm --version' and 'nvm which default' work in a fresh 'zsh -ic'. 5) Reinstall the global npm packages under nvm's node. Report what you changed."
+}
 
 # Auto-switch Node version based on .nvmrc
 _nvm_auto_use() {
@@ -92,14 +107,16 @@ _nvm_check_nvmrc_changed() {
   fi
 }
 
-# Auto-switch before each prompt — catches cd, git checkout, file changes, etc.
-autoload -U add-zsh-hook
-add-zsh-hook precmd _nvm_check_nvmrc_changed
+if command -v nvm >/dev/null; then
+  # Auto-switch before each prompt — catches cd, git checkout, file changes, etc.
+  autoload -U add-zsh-hook
+  add-zsh-hook precmd _nvm_check_nvmrc_changed
 
-# Run once on shell startup — always apply, not gated by content-change check
-_nvm_auto_use
-_NVM_LAST_NVMRC_CONTENT=""
-[[ -f .nvmrc ]] && _NVM_LAST_NVMRC_CONTENT=$(cat .nvmrc)
+  # Run once on shell startup — always apply, not gated by content-change check
+  _nvm_auto_use
+  _NVM_LAST_NVMRC_CONTENT=""
+  [[ -f .nvmrc ]] && _NVM_LAST_NVMRC_CONTENT=$(cat .nvmrc)
+fi
 
 # Bun
 export BUN_INSTALL="$HOME/.bun"
